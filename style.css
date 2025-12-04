@@ -1,0 +1,165 @@
+/* ======================================= */
+/* 1. STYLA OGÓLNE I TŁO GLASSMORPHISM */
+/* ======================================= */
+
+body {
+    background-image: url("img/bg.jpg");
+    background-size: cover;
+    background-attachment: fixed;
+    font-family: Arial, sans-serif;
+    color: #fff;
+    min-height: 100vh;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
+#container {
+    width: 100%;
+    max-width: 600px;
+    box-sizing: border-box;
+    padding: 20px;
+    border-radius: 20px;
+
+    /* Glassmorphism głównego kontenera */
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+}
+
+/* ======================================= */
+/* 2. STYL PASKÓW I FORMULARZA */
+/* ======================================= */
+
+#navbar {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    align-items: center;
+}
+
+#city-input {
+    flex-grow: 1;
+    padding: 10px;
+    border: none;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.8);
+    color: #333;
+}
+
+#weather-button {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 8px;
+    background-color: rgba(255, 255, 255, 0.3);
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+#weather-button:hover {
+    background-color: rgba(255, 255, 255, 0.5);
+}
+
+/* ======================================= */
+/* 3. AKTUALNA POGODA */
+/* ======================================= */
+
+#current-weather-bar {
+    background: rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1);
+    border-radius: 15px;
+    padding: 20px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+#current-weather-result img {
+    width: 80px;
+    height: 80px;
+    display: block;
+    margin: 0 auto;
+}
+
+#current-weather-result p:first-of-type {
+    font-size: 2.5em;
+    font-weight: bold;
+    margin: 5px 0;
+}
+
+/* ======================================= */
+/* 4. PROGNOZA 5-DNIOWA (UKŁAD POZIOMY - FLEXBOX Z NOWRAP) */
+/* ======================================= */
+
+/* Defensywna reguła dla najbliższego rodzica */
+#weather-bars > div:last-child {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* KONTENER FLEXBOX: Wymusza układ poziomy i przewijanie */
+#five-weather-result {
+    display: flex;
+    flex-direction: row;
+
+    /* KLUCZOWE: Zapobiega zawijaniu, nawet jeśli jest blokowane */
+    flex-wrap: nowrap;
+
+    /* OSTATECZNE WYMUSZENIE POZIOMEJ LINII: */
+    white-space: nowrap;
+
+    gap: 15px;
+    overflow-x: auto; /* Włącza pasek przewijania */
+
+    width: 100%;
+    padding: 10px;
+    padding-bottom: 20px;
+    margin: 0;
+}
+
+/* Styl dla każdej pojedynczej karty prognozy */
+#five-weather-result > div {
+    /* KLUCZOWE: Sztywna szerokość 120px */
+    flex: 0 0 120px;
+
+    /* Zezwól na zawijanie tekstu wewnątrz karty, bo white-space: nowrap na kontenerze jest zbyt agresywne */
+    white-space: normal;
+    word-break: break-word; /* Lepiej niż break-all */
+
+    /* Styl karty - mniejszy glassmorphism */
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 5px;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(8px);
+
+    padding: 10px 5px;
+    margin: 0;
+    text-align: center;
+    font-size: 0.9em;
+}
+
+#five-weather-result img {
+    width: 40px;
+    height: 40px;
+    vertical-align: middle;
+    margin: 5px 0;
+}
+
+#five-weather-result strong {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 0.9em;
+}
+
+#five-weather-result p {
+    margin: 3px 0;
+    line-height: 1.2;
+}
